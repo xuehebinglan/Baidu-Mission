@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Task 18</title>
+  <style>
+    #result div {
+      margin: 10px;
+      padding: 5px;
+      background-color: red;
+      text-align: center;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <input id="input" type="text" />
+    <button id="left-in">左侧入</button>
+    <button id="right-in">右侧入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+  </div>
+  <div id="result"></div>
+  <script>
+  // 队列数据
+  var queue_data = [];
+  var input = document.getElementById('input');
+  var left_in_btn = document.getElementById('left-in');
+  var right_in_btn = document.getElementById('right-in');
+  var left_out_btn = document.getElementById('left-out');
+  var right_out_btn = document.getElementById('right-out');
+  var result = document.getElementById('result');
+
+
+  function isNum(str) {
+    return /^\d+$/.test(str);
+  }
+
+  function update_result() {
+    result.innerHTML = "";
+    for (var i in queue_data) {
+      result.innerHTML += "<div>" + queue_data[i] + "</div>"
+    }
+  }
+
+
+  left_in_btn.onclick = function () {
+    var input_data = input.value;
+    if (!isNum(input_data)) {
+      alert('input is not num!');
+      return;
+    }
+    queue_data.unshift(input_data);
+    update_result();
+  }
+
+  left_out_btn.onclick = function () {
+    var v = queue_data.shift();
+    if (typeof(v) != 'undefined') {
+      alert(v);
+    }
+    update_result();
+  }
+
+
+  right_in_btn.onclick = function () {
+    var input_data = input.value;
+    if (!isNum(input_data)) {
+      alert('input is not num!');
+      return;
+    }
+    queue_data.push(input_data);
+    update_result();
+  }
+
+  right_out_btn.onclick = function () {
+    var v = queue_data.pop();
+    if (typeof(v) != 'undefined') {
+      alert(v);
+    }
+    update_result();
+  }
+
+
+  </script>
+</body>
+</html>
